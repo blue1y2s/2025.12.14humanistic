@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { TargetPersona, PersonaDimensions } from '../types';
+import React from 'react';
+import { TargetPersona } from '../types';
 import { getDefaultTargetPersonas } from '../utils/personaDimensions';
 import { clsx } from 'clsx';
 
@@ -9,14 +9,13 @@ interface TargetPersonaPanelProps {
 }
 
 export const TargetPersonaPanel: React.FC<TargetPersonaPanelProps> = ({ currentTarget, onTargetChange }) => {
-  const [isCustomizing, setIsCustomizing] = useState(false);
   const presets = getDefaultTargetPersonas();
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col text-gallery-charcoal">
       <div className="mb-6">
-        <h2 className="text-3xl font-serif text-white mb-2">Target Ideal</h2>
-        <p className="text-slate-400 text-sm">Select an archetype to compare your current mental state against.</p>
+        <h2 className="text-3xl font-serif text-gallery-charcoal mb-2">Ideal Form</h2>
+        <p className="text-gallery-charcoal/60 text-sm">Choose the archetype you wish to grow towards.</p>
       </div>
 
       <div className="flex-1 overflow-y-auto space-y-4 pr-2 custom-scrollbar">
@@ -27,20 +26,20 @@ export const TargetPersonaPanel: React.FC<TargetPersonaPanelProps> = ({ currentT
             className={clsx(
               "cursor-pointer p-6 rounded-2xl border transition-all duration-300",
               currentTarget?.id === p.id 
-                ? "bg-white/10 border-teal-400/50 shadow-[0_0_20px_rgba(45,212,191,0.1)]" 
-                : "bg-slate-900/40 border-white/5 hover:bg-white/5 hover:border-white/20"
+                ? "bg-white border-gallery-lime shadow-lg shadow-gallery-lime/20" 
+                : "bg-white/20 border-white hover:bg-white/50 hover:border-gallery-lime/50"
             )}
           >
             <div className="flex justify-between items-center mb-2">
-                 <div className={clsx("font-serif text-xl", currentTarget?.id === p.id ? "text-teal-200" : "text-slate-200")}>{p.name}</div>
-                 {currentTarget?.id === p.id && <div className="w-2 h-2 bg-teal-400 rounded-full animate-pulse" />}
+                 <div className={clsx("font-serif text-xl", currentTarget?.id === p.id ? "text-black font-bold" : "text-gallery-charcoal")}>{p.name}</div>
+                 {currentTarget?.id === p.id && <div className="w-2 h-2 bg-gallery-lime rounded-full animate-pulse shadow-[0_0_8px_#CCFF00]" />}
             </div>
-            <div className="text-sm text-slate-400 leading-relaxed">{p.description}</div>
+            <div className="text-sm text-gallery-charcoal/80 leading-relaxed">{p.description}</div>
           </div>
         ))}
 
-        <div className="mt-8 p-6 rounded-2xl border border-dashed border-white/10 text-center">
-             <p className="text-slate-500 text-sm">Custom parameter tuning available in Pro version.</p>
+        <div className="mt-8 p-6 rounded-2xl border border-dashed border-gallery-grey text-center bg-white/10">
+             <p className="text-gallery-charcoal/50 text-sm">Pruning shears available in Pro version.</p>
         </div>
       </div>
     </div>

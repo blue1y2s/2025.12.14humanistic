@@ -41,7 +41,7 @@ function App() {
   const isUniversePhase = scenePhase === 'universe';
 
   return (
-    <div className="relative w-full h-screen bg-[#020617] text-slate-200 overflow-hidden font-sans">
+    <div className="relative w-full h-screen bg-[#FDFCF5] text-gallery-charcoal overflow-hidden font-sans">
       
       {/* 3D Background */}
       <div className="absolute inset-0 z-0">
@@ -65,7 +65,7 @@ function App() {
         <>
           {/* Main Floating Content Card */}
           <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-full max-w-2xl h-[65%] pointer-events-none z-10 flex flex-col justify-end pb-10">
-            <div className="glass-panel w-full p-8 rounded-3xl shadow-2xl pointer-events-auto h-full overflow-hidden animate-in fade-in slide-in-from-bottom-10 duration-700">
+            <div className="glass-panel w-full p-8 rounded-3xl shadow-2xl pointer-events-auto h-full overflow-hidden animate-in fade-in slide-in-from-bottom-10 duration-700 bg-white/40">
                {activeTab === 'target' && (
                  <TargetPersonaPanel currentTarget={targetPersona} onTargetChange={setTargetPersona} />
                )}
@@ -83,7 +83,7 @@ function App() {
 
           {/* Bottom Tab Navigation */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
-             <div className="bg-slate-900/80 backdrop-blur-md rounded-full p-2 border border-white/10 flex gap-2 shadow-2xl">
+             <div className="bg-white/50 backdrop-blur-md rounded-full p-2 border border-white flex gap-2 shadow-lg">
                 {(['target', 'gap', 'insights', 'simulation'] as PresentationTab[]).map(tab => (
                   <button
                     key={tab}
@@ -91,8 +91,8 @@ function App() {
                     className={clsx(
                       "px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 capitalize",
                       activeTab === tab 
-                        ? "bg-white text-slate-900 font-bold shadow-[0_0_20px_rgba(255,255,255,0.3)]" 
-                        : "text-slate-400 hover:text-white hover:bg-white/5"
+                        ? "bg-gallery-lime text-gallery-charcoal font-bold shadow-md shadow-gallery-lime/30" 
+                        : "text-gallery-charcoal hover:text-gallery-charcoal hover:bg-white/60"
                     )}
                   >
                     {tab}
@@ -107,7 +107,7 @@ function App() {
       {isUniversePhase && (
         <button 
           onClick={() => setUiHidden(!uiHidden)}
-          className="absolute top-6 right-6 z-30 p-3 bg-slate-900/50 backdrop-blur rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-all border border-white/5"
+          className="absolute top-6 right-6 z-30 p-3 bg-white/30 backdrop-blur rounded-full text-gallery-charcoal hover:bg-gallery-lime transition-all border border-white shadow-sm"
           title={uiHidden ? "Show UI" : "Hide UI"}
         >
           {uiHidden ? (

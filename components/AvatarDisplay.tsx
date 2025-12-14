@@ -28,6 +28,8 @@ export const AvatarDisplay: React.FC<AvatarDisplayProps> = ({ spheres }) => {
 
   const mainColor = getSphereColor(stats.avgSentiment);
   const bodyColor = getAvatarBaseColor(stats.avgSentiment);
+  
+  const isNeon = mainColor === '#CCFF00';
 
   // Animation loop for breathing/floating
   useFrame((state) => {
@@ -56,13 +58,23 @@ export const AvatarDisplay: React.FC<AvatarDisplayProps> = ({ spheres }) => {
       {/* Head */}
       <mesh position={[0, 1.4, 0]} rotation={[headRotationX, 0, 0]}>
         <sphereGeometry args={[0.35, 32, 32]} />
-        <meshStandardMaterial color={mainColor} emissive={mainColor} emissiveIntensity={0.5} roughness={0.3} />
+        <meshPhysicalMaterial 
+            color={mainColor} 
+            emissive={mainColor} 
+            emissiveIntensity={isNeon ? 0.6 : 0.1} 
+            roughness={0.2}
+            clearcoat={1.0}
+        />
       </mesh>
 
       {/* Body */}
       <mesh position={[0, 0.6, 0]}>
         <cylinderGeometry args={[0.2, 0.2, 1.2, 32]} />
-        <meshStandardMaterial color={bodyColor} roughness={0.5} />
+        <meshPhysicalMaterial 
+            color={bodyColor} 
+            roughness={0.4} 
+            clearcoat={0.5}
+        />
       </mesh>
 
       {/* Arms - Left */}
@@ -71,7 +83,7 @@ export const AvatarDisplay: React.FC<AvatarDisplayProps> = ({ spheres }) => {
         rotation={[0, 0, isSad ? -0.2 : (isHappy ? 0.5 : 0.2)]}
       >
         <capsuleGeometry args={[0.08, 0.8, 4, 8]} />
-        <meshStandardMaterial color={bodyColor} />
+        <meshPhysicalMaterial color={bodyColor} roughness={0.4} />
       </mesh>
 
       {/* Arms - Right */}
@@ -80,7 +92,7 @@ export const AvatarDisplay: React.FC<AvatarDisplayProps> = ({ spheres }) => {
         rotation={[0, 0, isSad ? 0.2 : (isHappy ? -0.5 : -0.2)]}
       >
         <capsuleGeometry args={[0.08, 0.8, 4, 8]} />
-        <meshStandardMaterial color={bodyColor} />
+        <meshPhysicalMaterial color={bodyColor} roughness={0.4} />
       </mesh>
 
       {/* Base/Shadow Indicator */}

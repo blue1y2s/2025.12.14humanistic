@@ -14,14 +14,14 @@ export const PersonaDiffPanel: React.FC<PersonaDiffPanelProps> = ({ currentDimen
     return computeDimensionDiff(currentDimensions, targetPersona.dimensions);
   }, [currentDimensions, targetPersona]);
 
-  if (!currentDimensions) return <div className="text-slate-500 italic p-8">No consciousness detected yet.</div>;
-  if (!targetPersona) return <div className="text-slate-500 italic p-8">Select a target archetype to reveal gaps.</div>;
+  if (!currentDimensions) return <div className="text-gallery-charcoal/50 italic p-8">No seeds planted yet.</div>;
+  if (!targetPersona) return <div className="text-gallery-charcoal/50 italic p-8">Select an ideal form to see growth gaps.</div>;
 
   return (
-    <div className="h-full overflow-y-auto pr-2 custom-scrollbar">
+    <div className="h-full overflow-y-auto pr-2 custom-scrollbar text-gallery-charcoal">
        <div className="mb-8">
-        <h2 className="text-3xl font-serif text-white mb-2">Gap Analysis</h2>
-        <p className="text-slate-400 text-sm">Visualizing the dissonance between reality and ideal.</p>
+        <h2 className="text-3xl font-serif text-gallery-charcoal mb-2">Growth Analysis</h2>
+        <p className="text-gallery-charcoal/60 text-sm">Measuring the distance between current self and ideal self.</p>
       </div>
 
       <div className="space-y-8">
@@ -34,36 +34,35 @@ export const PersonaDiffPanel: React.FC<PersonaDiffPanelProps> = ({ currentDimen
           return (
             <div key={key} className="relative group">
               <div className="flex justify-between items-end mb-2">
-                <span className="text-sm font-bold uppercase tracking-widest text-slate-400">{key}</span>
-                <span className={clsx("font-serif text-2xl", isAligned ? "text-slate-500" : (diff > 0 ? "text-teal-400" : "text-rose-400"))}>
+                <span className="text-sm font-bold uppercase tracking-widest text-gallery-charcoal/40">{key}</span>
+                <span className={clsx("font-serif text-2xl", isAligned ? "text-gallery-charcoal/40" : (diff > 0 ? "text-black" : "text-gallery-charcoal/60"))}>
                    {diff > 0 ? '+' : ''}{(diff * 100).toFixed(0)}%
                 </span>
               </div>
               
               {/* Track */}
-              <div className="h-4 w-full bg-slate-900 rounded-full relative overflow-hidden border border-white/5">
+              <div className="h-4 w-full bg-white rounded-full relative overflow-hidden border border-white shadow-inner">
                 
-                {/* Current Value Bar (Glowing) */}
+                {/* Current Value Bar */}
                 <div 
-                  className="absolute top-0 left-0 h-full rounded-full transition-all duration-1000 ease-out shadow-[0_0_15px_currentColor]"
+                  className="absolute top-0 left-0 h-full rounded-full transition-all duration-1000 ease-out shadow-sm"
                   style={{ 
                       width: `${currentVal * 100}%`,
-                      backgroundColor: isAligned ? '#94a3b8' : (diff > 0 ? '#f43f5e' : '#2dd4bf'),
-                      color: isAligned ? '#94a3b8' : (diff > 0 ? '#f43f5e' : '#2dd4bf')
+                      backgroundColor: isAligned ? '#D6D3D1' : (diff > 0 ? '#FAFF00' : '#CCFF00'), // Grey, Yellow, Lime
                   }}
                 />
 
                 {/* Target Marker */}
                 <div 
-                  className="absolute top-0 bottom-0 w-[4px] bg-white/80 z-20 shadow-[0_0_10px_white]"
+                  className="absolute top-0 bottom-0 w-[4px] bg-black z-20"
                   style={{ left: `${targetVal * 100}%` }}
                 />
               </div>
 
               {/* Tooltip hint */}
               <div className="mt-1 text-right">
-                <span className="text-[10px] text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                    Target: {(targetVal * 100).toFixed(0)}%
+                <span className="text-[10px] text-gallery-charcoal/50 opacity-0 group-hover:opacity-100 transition-opacity">
+                    Goal: {(targetVal * 100).toFixed(0)}%
                 </span>
               </div>
             </div>

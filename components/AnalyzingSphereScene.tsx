@@ -17,7 +17,7 @@ const AnalyzingContent: React.FC<AnalyzingSphereSceneProps> = ({ scenePhase, onP
   const [elapsed, setElapsed] = useState(0);
 
   const targetColor = useMemo(() => {
-    if (posts.length === 0) return '#ECEDE8';
+    if (posts.length === 0) return '#CCFF00';
     const avg = posts.reduce((sum, p) => sum + p.sentimentScore, 0) / posts.length;
     return getSphereColor(avg);
   }, [posts]);
@@ -52,7 +52,7 @@ const AnalyzingContent: React.FC<AnalyzingSphereSceneProps> = ({ scenePhase, onP
     if (materialRef.current) {
         const colorProgress = Math.max(0, (newTime - 1.0) / 1.5);
         if (colorProgress <= 1) {
-            const startColor = new Color('#F4F3EE');
+            const startColor = new Color('#FDFCF5'); 
             const end = new Color(targetColor);
             materialRef.current.color.lerpColors(startColor, end, colorProgress);
         }
@@ -73,15 +73,16 @@ const AnalyzingContent: React.FC<AnalyzingSphereSceneProps> = ({ scenePhase, onP
     <group>
       <mesh ref={sphereRef}>
         <sphereGeometry args={[1.2, 64, 64]} />
-        <meshStandardMaterial 
+        <meshPhysicalMaterial 
             ref={materialRef}
-            color="#F4F3EE" 
+            color="#FDFCF5" 
             roughness={0.2}
             metalness={0.1}
+            clearcoat={1.0}
         />
       </mesh>
       
-      <ContactShadows opacity={0.3} scale={10} blur={2.5} far={4} color="#7A7C75" />
+      <ContactShadows opacity={0.3} scale={10} blur={2.5} far={4} color="#D6D3D1" />
 
       {fragments.map((frag) => {
          const activeTime = Math.max(0, elapsed - frag.delay);
@@ -103,7 +104,7 @@ const AnalyzingContent: React.FC<AnalyzingSphereSceneProps> = ({ scenePhase, onP
                 key={frag.id}
                 position={[x, y, z]}
                 scale={[scale, scale, scale]}
-                color="#2F2F2B" 
+                color="#1C1917" 
                 fillOpacity={opacity}
                 fontSize={0.5}
                 anchorX="center"
@@ -116,24 +117,24 @@ const AnalyzingContent: React.FC<AnalyzingSphereSceneProps> = ({ scenePhase, onP
          );
       })}
 
-      <ambientLight intensity={0.9} />
+      <ambientLight intensity={0.9} color="#FFF7ED" />
       <directionalLight position={[5, 10, 5]} intensity={0.8} />
-      <pointLight position={[-5, -5, -5]} intensity={0.3} color="#D3D4CE" />
+      <pointLight position={[-5, -5, -5]} intensity={0.5} color="#CCFF00" />
     </group>
   );
 };
 
 export const AnalyzingSphereScene: React.FC<AnalyzingSphereSceneProps> = (props) => {
   return (
-    <div className="w-full h-full relative bg-[#F4F3EE]">
+    <div className="w-full h-full relative bg-[#FDFCF5]">
        <Canvas camera={{ position: [0, 2, 8] }}>
-         <color attach="background" args={['#F4F3EE']} />
+         <color attach="background" args={['#FDFCF5']} />
          <AnalyzingContent {...props} />
        </Canvas>
        <div className="absolute top-20 w-full text-center pointer-events-none">
-          <div className="inline-flex flex-col items-center bg-[#F4F3EE]/80 backdrop-blur px-6 py-3 rounded-sm border border-[#D3D4CE]">
-             <h2 className="text-[#2F2F2B] text-sm font-medium tracking-wide mb-1">Assimilating Data</h2>
-             <p className="text-[#7A7C75] text-xs">Integrating memory fragments into core...</p>
+          <div className="inline-flex flex-col items-center bg-white/40 backdrop-blur px-6 py-3 rounded-sm border border-white shadow-sm">
+             <h2 className="text-gallery-charcoal text-sm font-medium tracking-wide mb-1">Absorbing</h2>
+             <p className="text-gallery-charcoal/50 text-xs">Integrating thoughts into the collection...</p>
           </div>
        </div>
     </div>

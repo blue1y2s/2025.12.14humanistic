@@ -8,34 +8,34 @@ interface InputPanelProps {
 
 const PRESETS = [
   {
-    title: "The Ranting Poet",
-    desc: "High emotion, creative chaos.",
-    data: `This world is too loud, yet silence screams.
-I hate how people chew with their mouths open, it drives me insane!
-But then the moon rises, and I feel this overwhelming peace.
-Why can't I just finish one painting without crying?
-Everyone thinks I'm dramatic, but I just feel everything at once.
-My coffee was cold. A tragedy.`
+    title: "The Reflective Gardener",
+    desc: "Growth, patience, and observation.",
+    data: `The rain today felt nourishing, not gloomy.
+My project is growing slowly, but the roots are strong.
+I feel a bit wilted after that meeting.
+Need to prune some bad habits this week.
+Grateful for the sunshine this morning.
+Patience is the hardest lesson to learn.`
   },
   {
-    title: "The Humble Achiever",
-    desc: "Quiet confidence, structured growth.",
-    data: `Completed the marathon today. Hard work pays off.
-Grateful for the team's support on the project.
-Need to refine my schedule for next week.
-Reading a book on stoicism, really insightful.
-Quiet evening with tea. Perfect.
-Promotion confirmed. I'm ready for the responsibility.`
+    title: "The Stormy Creator",
+    desc: "Intense bursts of energy and doubt.",
+    data: `Why is everything a mess?!
+I created something beautiful today, finally.
+Everyone is moving too slow.
+I love the chaos, but I hate the noise.
+Feeling like a hurricane in a library.
+Burnout is creeping in again.`
   },
   {
-    title: "The Anxious Observer",
-    desc: "Detail-oriented, hesitant, warm.",
-    data: `I think I said the wrong thing at dinner.
-Maybe they didn't mean it that way?
-The light hitting the leaves was nice.
-I hope mom is okay, haven't heard from her.
-Sort of feeling better, but still worried about the deadline.
-Just want everyone to be happy.`
+    title: "The Gentle Connector",
+    desc: "Warmth, family, and soft bonds.",
+    data: `Called mom today, her voice is home.
+Worried about my friend, he seems distant.
+Sunday brunch was lovely.
+I miss the way we used to talk.
+Sending love to everyone I know.
+Hope I'm doing enough for them.`
   }
 ];
 
@@ -49,7 +49,6 @@ export const InputPanel: React.FC<InputPanelProps> = ({ onGenerate, isExpanded, 
 
   const handlePreset = (presetText: string) => {
     setText(presetText);
-    // Slight delay for UX effect
     setTimeout(() => {
         const lines = presetText.split('\n');
         onGenerate(lines);
@@ -61,35 +60,35 @@ export const InputPanel: React.FC<InputPanelProps> = ({ onGenerate, isExpanded, 
   }
 
   return (
-    <div className="absolute top-0 left-0 h-full w-full md:w-[500px] glass-panel border-r border-white/10 p-10 flex flex-col z-20 shadow-2xl text-slate-200">
+    <div className="absolute top-0 left-0 h-full w-full md:w-[500px] glass-panel border-r border-white/50 p-10 flex flex-col z-20 shadow-2xl text-gallery-charcoal bg-white/40">
       <div className="mb-8">
-        <h1 className="text-4xl font-serif font-bold text-white tracking-tight mb-2">
-          Persona Sphere
+        <h1 className="text-4xl font-serif font-bold text-gallery-charcoal tracking-tight mb-2">
+          Mind Gallery
         </h1>
-        <p className="text-sm text-slate-400 font-sans tracking-wide uppercase">Psychological Cartography</p>
+        <p className="text-sm text-gallery-charcoal/60 font-sans tracking-wide uppercase">Curate Your Consciousness</p>
       </div>
 
       {/* Preset Cards */}
       <div className="grid grid-cols-1 gap-3 mb-6">
-        <p className="text-xs text-slate-500 font-bold uppercase tracking-widest mb-1">Quick Calibration</p>
+        <p className="text-xs text-gallery-charcoal/50 font-bold uppercase tracking-widest mb-1">Select an Exhibit</p>
         {PRESETS.map((p, i) => (
            <button
              key={i}
              onClick={() => handlePreset(p.data)}
-             className="text-left p-4 rounded-xl bg-slate-800/50 hover:bg-teal-900/30 border border-white/5 hover:border-teal-500/30 transition-all group"
+             className="text-left p-4 rounded-xl bg-white/40 hover:bg-white/70 border border-white hover:border-gallery-lime transition-all group shadow-sm"
            >
-             <div className="font-serif text-lg text-slate-200 group-hover:text-teal-200">{p.title}</div>
-             <div className="text-xs text-slate-500 group-hover:text-slate-400">{p.desc}</div>
+             <div className="font-serif text-lg text-gallery-charcoal group-hover:text-black">{p.title}</div>
+             <div className="text-xs text-gallery-charcoal/70">{p.desc}</div>
            </button>
         ))}
       </div>
 
-      <p className="text-slate-400 text-sm mb-2">Or enter raw stream of consciousness:</p>
+      <p className="text-gallery-charcoal/70 text-sm mb-2">Or scatter your thoughts here:</p>
 
       <div className="flex-1 flex flex-col relative mb-4">
         <textarea
-          className="flex-1 bg-slate-950/50 border border-white/10 rounded-xl p-4 text-slate-300 text-sm focus:border-teal-500/50 focus:ring-0 focus:outline-none resize-none transition-colors placeholder-slate-600 font-sans leading-relaxed"
-          placeholder="What is on your mind?"
+          className="flex-1 bg-white/40 border border-white/80 rounded-xl p-4 text-gallery-charcoal text-sm focus:border-gallery-lime focus:ring-0 focus:outline-none resize-none transition-colors placeholder-gallery-charcoal/40 font-sans leading-relaxed shadow-inner"
+          placeholder="What is blooming in your mind?"
           value={text}
           onChange={(e) => setText(e.target.value)}
           spellCheck={false}
@@ -99,14 +98,14 @@ export const InputPanel: React.FC<InputPanelProps> = ({ onGenerate, isExpanded, 
       <button 
         onClick={handleGenerate}
         disabled={!text.trim()}
-        className="py-4 px-6 rounded-xl bg-gradient-to-r from-teal-600 to-teal-800 text-white font-serif text-lg shadow-lg hover:shadow-teal-500/20 hover:scale-[1.02] disabled:opacity-50 disabled:scale-100 disabled:cursor-not-allowed transition-all"
+        className="py-4 px-6 rounded-xl bg-gallery-lime text-gallery-charcoal font-serif text-lg font-bold shadow-lg shadow-gallery-lime/20 hover:bg-gallery-yellow hover:scale-[1.02] disabled:opacity-50 disabled:scale-100 disabled:cursor-not-allowed transition-all"
       >
-        Materialize Universe
+        Materialize
       </button>
 
       <div className="mt-6 text-center">
-        <p className="text-[10px] text-slate-600 tracking-widest uppercase">
-          Local Processing • Private Environment
+        <p className="text-[10px] text-gallery-charcoal/40 tracking-widest uppercase">
+          Private Sanctuary • Local Storage
         </p>
       </div>
     </div>

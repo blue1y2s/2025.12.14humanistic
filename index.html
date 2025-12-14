@@ -17,12 +17,13 @@
               sans: ['"Inter"', 'sans-serif'],
             },
             colors: {
-              aurora: {
-                deep: '#020617', // Slate 950
-                teal: '#2dd4bf',
-                purple: '#c084fc',
-                pink: '#f472b6',
-                glass: 'rgba(255, 255, 255, 0.05)',
+              gallery: {
+                cream: '#FDFCF5',      // Main Background
+                lime: '#CCFF00',       // Primary Accent / Positive
+                yellow: '#FAFF00',     // Warning / Rant
+                grey: '#D6D3D1',       // Negative / Shadow
+                charcoal: '#1C1917',   // Text
+                white: '#FFFFFF',      // Pure White
               }
             }
           }
@@ -34,11 +35,11 @@
         margin: 0;
         padding: 0;
         height: 100%;
-        background-color: #020617; /* Deep Space */
-        color: #e2e8f0; /* Soft White */
+        background-color: #FDFCF5; /* Gallery Cream */
+        color: #1C1917; /* Deep Charcoal */
         overflow: hidden;
       }
-      /* Custom Scrollbar - Ethereal Style */
+      /* Custom Scrollbar */
       ::-webkit-scrollbar {
         width: 6px;
       }
@@ -46,17 +47,18 @@
         background: transparent;
       }
       ::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.2);
+        background: #D6D3D1;
         border-radius: 3px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.4);
+        background: #CCFF00;
       }
       .glass-panel {
-        background: rgba(15, 23, 42, 0.6);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        box-shadow: 0 4px 20px rgba(204, 255, 0, 0.1);
       }
     </style>
   <script type="importmap">

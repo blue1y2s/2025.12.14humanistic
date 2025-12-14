@@ -65,19 +65,19 @@ const CagedContent: React.FC<CagedSphereSceneProps> = ({ scenePhase, onPhaseChan
 
   return (
     <group>
-      {/* The Cage - Soft Structural Grey */}
+      {/* The Cage - Warm Grey Wireframe */}
       <mesh ref={cubeRef}>
         <boxGeometry args={[2.5, 2.5, 2.5]} />
         <meshBasicMaterial 
           ref={materialRef}
-          color="#7A7C75" 
+          color="#D6D3D1" 
           wireframe={true} 
           transparent={true}
-          opacity={0.3}
+          opacity={0.5}
         />
       </mesh>
 
-      {/* The Soul Sphere - Clean White/Daylight */}
+      {/* The Soul Sphere - Neon Lime */}
       <mesh 
         ref={sphereRef} 
         onClick={handleClick}
@@ -85,36 +85,38 @@ const CagedContent: React.FC<CagedSphereSceneProps> = ({ scenePhase, onPhaseChan
         onPointerOut={() => document.body.style.cursor = 'auto'}
       >
         <sphereGeometry args={[0.8, 64, 64]} />
-        <meshStandardMaterial 
-          color="#F4F3EE"
+        <meshPhysicalMaterial 
+          color="#CCFF00"
+          emissive="#CCFF00"
+          emissiveIntensity={0.2}
           roughness={0.2}
           metalness={0.1}
         />
       </mesh>
       
-      <ContactShadows opacity={0.3} scale={10} blur={2.5} far={4} color="#7A7C75" />
+      <ContactShadows opacity={0.3} scale={10} blur={2.5} far={4} color="#D6D3D1" />
       
       {/* Studio Lighting - Warm & Soft */}
-      <ambientLight intensity={0.9} />
-      <directionalLight position={[5, 10, 5]} intensity={0.6} castShadow />
-      <directionalLight position={[-5, 0, -5]} intensity={0.4} color="#ECEDE8" />
+      <ambientLight intensity={0.9} color="#FFF7ED" />
+      <directionalLight position={[5, 10, 5]} intensity={0.6} castShadow color="#FFFFFF" />
+      <directionalLight position={[-5, 0, -5]} intensity={0.4} color="#FAFF00" />
     </group>
   );
 };
 
 export const CagedSphereScene: React.FC<CagedSphereSceneProps> = (props) => {
   return (
-    <div className="w-full h-full relative bg-[#F4F3EE]">
+    <div className="w-full h-full relative bg-[#FDFCF5]">
       <Canvas camera={{ position: [0, 0, 6] }}>
-        <color attach="background" args={['#F4F3EE']} />
+        <color attach="background" args={['#FDFCF5']} />
         <CagedContent {...props} />
       </Canvas>
       
       {props.scenePhase === 'caged' && (
         <div className="absolute bottom-20 w-full text-center pointer-events-none">
-          <div className="inline-block px-6 py-4 rounded-sm bg-[#F4F3EE]/80 border border-[#D3D4CE] shadow-sm">
-            <p className="text-[#7A7C75] text-[10px] font-bold tracking-widest uppercase mb-1">Status: Restricted</p>
-            <p className="text-[#2F2F2B] text-sm font-medium">Tap subject to release containment</p>
+          <div className="inline-block px-6 py-4 rounded-full bg-white/40 border border-white shadow-sm backdrop-blur">
+            <p className="text-gallery-charcoal/50 text-[10px] font-bold tracking-widest uppercase mb-1">Status: Dormant</p>
+            <p className="text-gallery-charcoal text-sm font-medium">Touch sphere to begin</p>
           </div>
         </div>
       )}

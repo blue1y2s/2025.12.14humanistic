@@ -1,11 +1,3 @@
-import type { ThreeElements } from '@react-three/fiber';
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements extends ThreeElements {}
-  }
-}
-
 export type PostCategory = 'daily' | 'rant' | 'reflection' | 'achievement' | 'relationship' | 'other';
 
 export interface AnalyzedPost {
@@ -20,9 +12,10 @@ export interface AnalyzedPost {
 export interface MemorySphere {
   id: string;
   post: AnalyzedPost;
-  position: [number, number, number];
   radius: number;
   color: string;
+  timelinePosition: [number, number, number];
+  humanoidPosition: [number, number, number];
 }
 
 export interface AvatarStats {
