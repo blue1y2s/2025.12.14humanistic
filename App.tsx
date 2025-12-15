@@ -105,6 +105,20 @@ function App() {
         </>
       )}
 
+      {/* Top Left Controls */}
+      <div className="absolute top-6 left-6 z-30">
+        {isUniversePhase && (
+          <button
+            onClick={() => setScenePhase('input')}
+            className="p-3 bg-white/30 backdrop-blur rounded-full text-gallery-charcoal hover:bg-white/60 transition-all border border-white shadow-sm group flex items-center gap-2 pr-5"
+            title="Revise Thoughts"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-x-1 transition-transform"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+            <span className="font-serif font-bold text-sm">Revise</span>
+          </button>
+        )}
+      </div>
+
       {/* Top Right Controls Group */}
       <div className="absolute top-6 right-6 z-30 flex gap-3">
         {isUniversePhase && (

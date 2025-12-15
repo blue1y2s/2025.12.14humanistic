@@ -55,12 +55,8 @@ export const InputPanel: React.FC<InputPanelProps> = ({ onGenerate, isExpanded, 
     }, 100);
   };
 
-  if (!isExpanded) {
-    return null;
-  }
-
   return (
-    <div className="absolute top-0 left-0 h-full w-full md:w-[500px] glass-panel border-r border-white/50 p-10 flex flex-col z-20 shadow-2xl text-gallery-charcoal bg-white/40">
+    <div className={`absolute top-0 left-0 h-full w-full md:w-[500px] glass-panel border-r border-white/50 p-10 flex flex-col z-20 shadow-2xl text-gallery-charcoal bg-white/40 transition-all duration-500 ease-in-out transform ${isExpanded ? 'translate-x-0 opacity-100 pointer-events-auto' : '-translate-x-10 opacity-0 pointer-events-none'}`}>
       <div className="mb-8">
         <h1 className="text-4xl font-serif font-bold text-gallery-charcoal tracking-tight mb-2">
           Mind Gallery
