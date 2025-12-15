@@ -5,6 +5,7 @@ import { TargetPersonaPanel } from './components/TargetPersonaPanel';
 import { PersonaDiffPanel } from './components/PersonaDiffPanel';
 import { LanguageInsightsPanel } from './components/LanguageInsightsPanel';
 import { WhatIfStudio } from './components/WhatIfStudio';
+import { ExitReflection } from './components/ExitReflection';
 import { usePostAnalysis } from './hooks/usePostAnalysis';
 import { layoutMemorySpheres } from './utils/layout3d';
 import { computePersonaDimensions } from './utils/personaDimensions';
@@ -23,6 +24,7 @@ function App() {
   // UI States
   const [activeTab, setActiveTab] = useState<PresentationTab>('target');
   const [uiHidden, setUiHidden] = useState(false);
+  const [showExitReflection, setShowExitReflection] = useState(false);
 
   const { analyzePosts } = usePostAnalysis();
 
@@ -103,20 +105,34 @@ function App() {
         </>
       )}
 
-      {/* Visibility Toggle (Top Right) */}
-      {isUniversePhase && (
-        <button 
-          onClick={() => setUiHidden(!uiHidden)}
-          className="absolute top-6 right-6 z-30 p-3 bg-white/30 backdrop-blur rounded-full text-gallery-charcoal hover:bg-gallery-lime transition-all border border-white shadow-sm"
-          title={uiHidden ? "Show UI" : "Hide UI"}
-        >
-          {uiHidden ? (
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-          ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
-          )}
-        </button>
-      )}
+      {/* Top Right Controls Group */}
+      <div className="absolute top-6 right-6 z-30 flex gap-3">
+        {isUniversePhase && (
+          <button
+            onClick={() => setShowExitReflection(true)}
+            className="p-3 bg-white/30 backdrop-blur rounded-full text-gallery-charcoal hover:bg-white/60 transition-all border border-white shadow-sm group"
+            title="End Session"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:text-gallery-lime transition-colors"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+          </button>
+        )}
+
+        {isUniversePhase && (
+          <button 
+            onClick={() => setUiHidden(!uiHidden)}
+            className="p-3 bg-white/30 backdrop-blur rounded-full text-gallery-charcoal hover:bg-gallery-lime transition-all border border-white shadow-sm"
+            title={uiHidden ? "Show UI" : "Hide UI"}
+          >
+            {uiHidden ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+            )}
+          </button>
+        )}
+      </div>
+
+      <ExitReflection isOpen={showExitReflection} onClose={() => setShowExitReflection(false)} />
     </div>
   );
 }
